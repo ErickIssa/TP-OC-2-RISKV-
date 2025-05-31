@@ -1,5 +1,5 @@
 $date
-	Sat May 24 19:55:50 2025
+	Sat May 31 15:54:28 2025
 $end
 $version
 	Icarus Verilog
@@ -7,7 +7,7 @@ $end
 $timescale
 	1ps
 $end
-$scope module datapath_tb $end
+$scope module data_path_tb $end
 $var wire 1 ! endFile $end
 $var reg 1 " clockDP_ $end
 $var reg 201 # nomeArquivoInstDP_ [200:0] $end
@@ -42,29 +42,29 @@ $var wire 2 ; aluOpDP [1:0] $end
 $var wire 4 < aluCtrlDP [3:0] $end
 $var wire 32 = addBranchDP [31:0] $end
 $var wire 32 > add4OutDP [31:0] $end
+$scope module Alu_Control $end
+$var wire 4 ? f3f7ACtrl [3:0] $end
+$var wire 1 @ funct7ACtrl $end
+$var wire 3 A funct3ACtrl [2:0] $end
+$var wire 2 B aluOpACtrl [1:0] $end
+$var reg 4 C aluCtrlACtrl [3:0] $end
+$upscope $end
 $scope module add4 $end
-$var wire 32 ? a [31:0] $end
-$var wire 32 @ out [31:0] $end
-$var wire 32 A b [31:0] $end
+$var wire 32 D a [31:0] $end
+$var wire 32 E out [31:0] $end
+$var wire 32 F b [31:0] $end
 $upscope $end
 $scope module addBranch $end
-$var wire 32 B out [31:0] $end
-$var wire 32 C b [31:0] $end
-$var wire 32 D a [31:0] $end
+$var wire 32 G out [31:0] $end
+$var wire 32 H b [31:0] $end
+$var wire 32 I a [31:0] $end
 $upscope $end
 $scope module alu $end
+$var wire 4 J aluControlAlu [3:0] $end
 $var wire 1 8 zeroAlu $end
-$var wire 32 E aluInput2 [31:0] $end
-$var wire 32 F aluInput1 [31:0] $end
-$var wire 4 G aluControlAlu [3:0] $end
-$var reg 32 H aluResultAlu [31:0] $end
-$upscope $end
-$scope module aluControl $end
-$var wire 4 I f3f7ACtrl [3:0] $end
-$var wire 1 J funct7ACtrl $end
-$var wire 3 K funct3ACtrl [2:0] $end
-$var wire 2 L aluOpACtrl [1:0] $end
-$var reg 4 M aluCtrlACtrl [3:0] $end
+$var wire 32 K aluInput2 [31:0] $end
+$var wire 32 L aluInput1 [31:0] $end
+$var reg 32 M aluResultAlu [31:0] $end
 $upscope $end
 $scope module ctrlDP $end
 $var wire 7 N instructionCtrl [6:0] $end
@@ -136,6 +136,9 @@ $upscope $end
 $upscope $end
 $upscope $end
 $enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
 #0
 $dumpvars
 b100000 m
@@ -173,18 +176,18 @@ bx N
 bx M
 bx L
 bx K
-xJ
+bx J
 bx I
 bx H
 bx G
 bx F
 bx E
-bx D
+b100 D
 bx C
 bx B
 bx A
-bx @
-b100 ?
+x@
+bx ?
 bx >
 bx =
 bx <
@@ -222,10 +225,10 @@ b101010 )
 b101010 d
 b101010 i
 b10 <
-b10 G
-b10 M
+b10 C
+b10 J
 b101010 :
-b101010 H
+b101010 M
 b101010 Q
 b101010 b
 0'
@@ -236,16 +239,16 @@ b101010 b
 01
 07
 b0 ;
-b0 L
+b0 B
 b0 O
 b101010 0
-b101010 E
+b101010 K
 b101010 `
 b100 /
 b100 ^
 b100 e
 b0 -
-b0 F
+b0 L
 b0 k
 b0 ,
 b0 R
@@ -253,31 +256,31 @@ b0 a
 b0 l
 b10100000 P
 b101010 =
-b101010 B
+b101010 G
 b101010 ]
 b101010 5
-b101010 C
+b101010 H
 b101010 U
 b101010 _
-b0 K
-0J
+b0 A
+0@
 b1 j
 b1010 h
 b0 g
 b10011 N
 b0 6
-b0 I
+b0 ?
 b10101000000000000010010011 4
 b10101000000000000010010011 T
 b10101000000000000010010011 X
 b10101000000000000010010011 Y
 b1 [
 b100 >
-b100 @
+b100 E
 b100 \
 b0 .
-b0 A
-b0 D
+b0 F
+b0 I
 b0 W
 b0 f
 1"
@@ -292,14 +295,14 @@ b10000 )
 b10000 d
 b10000 i
 b10000 :
-b10000 H
+b10000 M
 b10000 Q
 b10000 b
 b10000 0
-b10000 E
+b10000 K
 b10000 `
 b10000 5
-b10000 C
+b10000 H
 b10000 U
 b10000 _
 b10 j
@@ -313,14 +316,14 @@ b1000000000000000100010011 X
 b1000000000000000100010011 Y
 b1 [
 b10100 =
-b10100 B
+b10100 G
 b10100 ]
 b1000 >
-b1000 @
+b1000 E
 b1000 \
 b100 .
-b100 A
-b100 D
+b100 F
+b100 I
 b100 W
 b100 f
 1"
@@ -332,14 +335,14 @@ b1000 )
 b1000 d
 b1000 i
 b1000 :
-b1000 H
+b1000 M
 b1000 Q
 b1000 b
 b1000 0
-b1000 E
+b1000 K
 b1000 `
 b1000 5
-b1000 C
+b1000 H
 b1000 U
 b1000 _
 b11 j
@@ -353,14 +356,14 @@ b100000000000000110010011 X
 b100000000000000110010011 Y
 b1 [
 b10000 =
-b10000 B
+b10000 G
 b10000 ]
 b1100 >
-b1100 @
+b1100 E
 b1100 \
 b1000 .
-b1000 A
-b1000 D
+b1000 F
+b1000 I
 b1000 W
 b1000 f
 1"
@@ -371,18 +374,18 @@ b1 )
 b1 d
 b1 i
 b1 :
-b1 H
+b1 M
 b1 Q
 b1 b
 b1 0
-b1 E
+b1 K
 b1 `
 b101010 ,
 b101010 R
 b101010 a
 b101010 l
 b1 5
-b1 C
+b1 H
 b1 U
 b1 _
 b111 j
@@ -396,14 +399,14 @@ b100000000001110010011 X
 b100000000001110010011 Y
 b1 [
 b1101 =
-b1101 B
+b1101 G
 b1101 ]
 b10000 >
-b10000 @
+b10000 E
 b10000 \
 b1100 .
-b1100 A
-b1100 D
+b1100 F
+b1100 I
 b1100 W
 b1100 f
 1"
@@ -414,21 +417,21 @@ b100 )
 b100 d
 b100 i
 b100 <
-b100 G
-b100 M
+b100 C
+b100 J
 b100 :
-b100 H
+b100 M
 b100 Q
 b100 b
 09
 b10 ;
-b10 L
+b10 B
 b10 O
 b1 0
-b1 E
+b1 K
 b1 `
 b1000 -
-b1000 F
+b1000 L
 b1000 k
 b1 ,
 b1 R
@@ -436,16 +439,16 @@ b1 a
 b1 l
 b100010 P
 bx 5
-bx C
+bx H
 bx U
 bx _
-b101 K
+b101 A
 b11 j
 b111 h
 b11 g
 b110011 N
 b101 6
-b101 I
+b101 ?
 b10100 /
 b10100 ^
 b10100 e
@@ -455,14 +458,14 @@ b11100011101000110110011 X
 b11100011101000110110011 Y
 b1 [
 bx =
-bx B
+bx G
 bx ]
 b10100 >
-b10100 @
+b10100 E
 b10100 \
 b10000 .
-b10000 A
-b10000 D
+b10000 F
+b10000 I
 b10000 W
 b10000 f
 1"
@@ -474,20 +477,20 @@ b0 )
 b0 d
 b0 i
 b10 <
-b10 G
-b10 M
+b10 C
+b10 J
 b0 :
-b0 H
+b0 M
 b0 Q
 b0 b
 b0 0
-b0 E
+b0 K
 b0 `
 19
 0*
 11
 b0 ;
-b0 L
+b0 B
 b0 O
 b101010 ,
 b101010 R
@@ -495,22 +498,22 @@ b101010 a
 b101010 l
 b10001000 P
 b10100 =
-b10100 B
+b10100 G
 b10100 ]
 b0 5
-b0 C
+b0 H
 b0 U
 b0 _
 b0 -
-b0 F
+b0 L
 b0 k
-b10 K
+b10 A
 b0 j
 b1 h
 b0 g
 b100011 N
 b10 6
-b10 I
+b10 ?
 b11000 /
 b11000 ^
 b11000 e
@@ -520,11 +523,11 @@ b100000010000000100011 X
 b100000010000000100011 Y
 b1 [
 b11000 >
-b11000 @
+b11000 E
 b11000 \
 b10100 .
-b10100 A
-b10100 D
+b10100 F
+b10100 I
 b10100 W
 b10100 f
 1"
@@ -536,11 +539,11 @@ b100 )
 b100 d
 b100 i
 b100 :
-b100 H
+b100 M
 b100 Q
 b100 b
 b100 -
-b100 F
+b100 L
 b100 k
 b10000 ,
 b10000 R
@@ -557,14 +560,14 @@ b1000011010000000100011 X
 b1000011010000000100011 Y
 b1 [
 b11000 =
-b11000 B
+b11000 G
 b11000 ]
 b11100 >
-b11100 @
+b11100 E
 b11100 \
 b11000 .
-b11000 A
-b11000 D
+b11000 F
+b11000 I
 b11000 W
 b11000 f
 1"
@@ -573,7 +576,7 @@ b11000 f
 #17000
 18
 b0 :
-b0 H
+b0 M
 b0 Q
 b0 b
 b101010 )
@@ -587,7 +590,7 @@ b101010 c
 13
 01
 b0 -
-b0 F
+b0 L
 b0 k
 b0 ,
 b0 R
@@ -607,14 +610,14 @@ b10000100000011 X
 b10000100000011 Y
 b1 [
 b11100 =
-b11100 B
+b11100 G
 b11100 ]
 b100000 >
-b100000 @
+b100000 E
 b100000 \
 b11100 .
-b11100 A
-b11100 D
+b11100 F
+b11100 I
 b11100 W
 b11100 f
 1"
@@ -629,11 +632,11 @@ b10000 +
 b10000 S
 b10000 c
 b100 :
-b100 H
+b100 M
 b100 Q
 b100 b
 b100 -
-b100 F
+b100 L
 b100 k
 b1 j
 b11 g
@@ -646,14 +649,14 @@ b11010000010000011 X
 b11010000010000011 Y
 b1 [
 b100000 =
-b100000 B
+b100000 G
 b100000 ]
 b100100 >
-b100100 @
+b100100 E
 b100100 \
 b100000 .
-b100000 A
-b100000 D
+b100000 F
+b100000 I
 b100000 W
 b100000 f
 1"
@@ -662,7 +665,7 @@ b100000 f
 #21000
 18
 b0 :
-b0 H
+b0 M
 b0 Q
 b0 b
 b0 )
@@ -671,15 +674,15 @@ b0 i
 02
 03
 b0 -
-b0 F
+b0 L
 b0 k
 b10100000 P
-b0 K
+b0 A
 b100 j
 b0 g
 b10011 N
 b0 6
-b0 I
+b0 ?
 b101000 /
 b101000 ^
 b101000 e
@@ -689,14 +692,14 @@ b1000010011 X
 b1000010011 Y
 b1 [
 b100100 =
-b100100 B
+b100100 G
 b100100 ]
 b101000 >
-b101000 @
+b101000 E
 b101000 \
 b100100 .
-b100100 A
-b100100 D
+b100100 F
+b100100 I
 b100100 W
 b100100 f
 1"
@@ -708,14 +711,14 @@ b100 )
 b100 d
 b100 i
 b100 :
-b100 H
+b100 M
 b100 Q
 b100 b
 b100 0
-b100 E
+b100 K
 b100 `
 b100 5
-b100 C
+b100 H
 b100 U
 b100 _
 b100 h
@@ -729,14 +732,14 @@ b10000100000001000010011 X
 b10000100000001000010011 Y
 b1 [
 b101100 =
-b101100 B
+b101100 G
 b101100 ]
 b101100 >
-b101100 @
+b101100 E
 b101100 \
 b101000 .
-b101000 A
-b101000 D
+b101000 F
+b101000 I
 b101000 W
 b101000 f
 1"
@@ -747,38 +750,38 @@ b1100 )
 b1100 d
 b1100 i
 b110 <
-b110 G
-b110 M
+b110 C
+b110 J
 b1100 :
-b1100 H
+b1100 M
 b1100 Q
 b1100 b
 09
 b10 ;
-b10 L
+b10 B
 b10 O
 b100 0
-b100 E
+b100 K
 b100 `
 b100010 P
 bx 5
-bx C
+bx H
 bx U
 bx _
 b10000 -
-b10000 F
+b10000 L
 b10000 k
 b100 ,
 b100 R
 b100 a
 b100 l
-1J
+1@
 b1 j
 b11 h
 b1 g
 b110011 N
 b1000 6
-b1000 I
+b1000 ?
 b110000 /
 b110000 ^
 b110000 e
@@ -788,14 +791,14 @@ b1000000001100001000000010110011 X
 b1000000001100001000000010110011 Y
 b1 [
 bx =
-bx B
+bx G
 bx ]
 b110000 >
-b110000 @
+b110000 E
 b110000 \
 b101100 .
-b101100 A
-b101100 D
+b101100 F
+b101100 I
 b101100 W
 b101100 f
 1"
@@ -806,21 +809,21 @@ b1000 )
 b1000 d
 b1000 i
 b1000 :
-b1000 H
+b1000 M
 b1000 Q
 b1000 b
 b11 <
-b11 G
-b11 M
+b11 C
+b11 J
 b1100 -
-b1100 F
+b1100 L
 b1100 k
-b100 K
-0J
+b100 A
+0@
 b101 j
 b100 h
 b100 6
-b100 I
+b100 ?
 b110100 /
 b110100 ^
 b110100 e
@@ -830,11 +833,11 @@ b10000001100001010110011 X
 b10000001100001010110011 Y
 b1 [
 b110100 >
-b110100 @
+b110100 E
 b110100 \
 b110000 .
-b110000 A
-b110000 D
+b110000 F
+b110000 I
 b110000 W
 b110000 f
 1"
@@ -845,24 +848,24 @@ b11000 )
 b11000 d
 b11000 i
 b11000 :
-b11000 H
+b11000 M
 b11000 Q
 b11000 b
 b1 0
-b1 E
+b1 K
 b1 `
 b101 <
-b101 G
-b101 M
+b101 C
+b101 J
 b1 ,
 b1 R
 b1 a
 b1 l
-b1 K
+b1 A
 b110 j
 b111 h
 b1 6
-b1 I
+b1 ?
 b111000 /
 b111000 ^
 b111000 e
@@ -872,11 +875,11 @@ b11100001001001100110011 X
 b11100001001001100110011 Y
 b1 [
 b111000 >
-b111000 @
+b111000 E
 b111000 \
 b110100 .
-b110100 A
-b110100 D
+b110100 F
+b110100 I
 b110100 W
 b110100 f
 1"
@@ -886,14 +889,14 @@ b110100 f
 x'
 x8
 bx :
-bx H
+bx M
 bx Q
 bx b
 bx )
 bx d
 bx i
 bx 0
-bx E
+bx K
 bx `
 x9
 x2
@@ -902,26 +905,26 @@ x3
 x1
 x7
 bx ;
-bx L
+bx B
 bx O
 b10 <
-b10 G
-b10 M
+b10 C
+b10 J
 b0 -
-b0 F
+b0 L
 b0 k
 b0 ,
 b0 R
 b0 a
 b0 l
 bx P
-b0 K
+b0 A
 b0 j
 b0 h
 b0 g
 b0 N
 b0 6
-b0 I
+b0 ?
 bx /
 bx ^
 bx e
@@ -930,11 +933,11 @@ b0 T
 b0 X
 b11111111111111111111111111111111 [
 b111100 >
-b111100 @
+b111100 E
 b111100 \
 b111000 .
-b111000 A
-b111000 D
+b111000 F
+b111000 I
 b111000 W
 b111000 f
 1"
@@ -943,11 +946,11 @@ b111000 f
 #33000
 1!
 bx >
-bx @
+bx E
 bx \
 bx .
-bx A
-bx D
+bx F
+bx I
 bx W
 bx f
 1"
