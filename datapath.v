@@ -11,7 +11,7 @@ module datapath_tb;
     datapathR5 dpR5(clockDP_, resetDP_, nomeArquivoInstDP_, endFile);
 
     initial begin
-        nomeArquivoInstDP_ = "inputDP2.txt";
+        nomeArquivoInstDP_ = "inputDP.txt";
         $dumpfile("dpteste.vcd");
         $dumpvars(3, datapath_tb);
     end
@@ -48,13 +48,16 @@ module datapathR5(clockDP, resetDP, nomeArquivoDP, endFile);
      addBranchDP, readData1DP, readData2DP, muxAluOutDP, aluOutDP, readMemDP, writeRegDataDP;
     wire branchDP, memReadDP, memToRegDP, memWriteDP, aluSrcDP, regWriteDP,
      aluZeroDP, andOutDP;
+     wire branchTaken;
     wire [1:0] aluOpDP;
     wire [3:0] aluCtrlDP;
     wire [3:0] f3f7AluCtrlDP;
     output endFile;
 
-    assign andOutDP = branchDP & aluZeroDP;
     assign f3f7AluCtrlDP = {instructionDP[30], instructionDP[14:12]};
+    assign branchTaken = (instructionDP[14:12] == 3'b000) ? (branchDP & aluZeroDP) :
+                         (instructionDP[14:12] == 3'b001) ? (branchDP & ~aluZeroDP) : // bne
+                         1'b0;
 
     pc pcDP(pcInDP, pcOutDP, clockDP, resetDP);
     instructionMemory insMem(pcOutDP, nomeArquivoDP, instructionDP, endFile); // 
@@ -68,7 +71,7 @@ module datapathR5(clockDP, resetDP, nomeArquivoDP, endFile);
     add addBranch(pcOutDP, immGenOutDP, addBranchDP);
     alu alu(readData1DP, muxAluOutDP, aluCtrlDP, aluOutDP, aluZeroDP);
     dataMemory dataMem(clockDP, memReadDP, memWriteDP, aluOutDP, readData2DP, readMemDP);
-    mux2In muxAdds(add4OutDP, addBranchDP, pcInDP, andOutDP);
+    mux2In muxAdds(add4OutDP, addBranchDP, pcInDP, branchTaken);
     mux2In muxAlu(readData2DP, immGenOutDP, muxAluOutDP, aluSrcDP);
     mux2In muxDataMem(aluOutDP, readMemDP, writeRegDataDP, memToRegDP);
 
