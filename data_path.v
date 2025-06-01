@@ -11,7 +11,7 @@ module data_path_tb;
     data_pathR5 dpR5(clockDP_, resetDP_, nomeArquivoInstDP_, endFile);
 
     initial begin
-        nomeArquivoInstDP_ = "inputDP2.txt";
+        nomeArquivoInstDP_ = "inputDP.txt";
         $dumpfile("dpteste.vcd");
         $dumpvars(3, data_path_tb);
     end
@@ -48,13 +48,16 @@ module data_pathR5(clockDP, resetDP, nomeArquivoDP, endFile);
      addBranchDP, readData1DP, readData2DP, muxAluOutDP, aluOutDP, readMemDP, writeRegDataDP;
     wire branchDP, memReadDP, memToRegDP, memWriteDP, aluSrcDP, regWriteDP,
      aluZeroDP, andOutDP;
+     wire branchTaken;
     wire [1:0] aluOpDP;
     wire [3:0] aluCtrlDP;
     wire [3:0] f3f7AluCtrlDP;
     output endFile;
 
-    assign andOutDP = branchDP & aluZeroDP;
     assign f3f7AluCtrlDP = {instructionDP[30], instructionDP[14:12]};
+    assign branchTaken = (instructionDP[14:12] == 3'b000) ? (branchDP & aluZeroDP) :
+                         (instructionDP[14:12] == 3'b001) ? (branchDP & ~aluZeroDP) : // bne
+                         1'b0;
 
     pc pcDP(pcInDP, pcOutDP, clockDP, resetDP);
     Instruction_mem insMem(pcOutDP, nomeArquivoDP, instructionDP, endFile); // 
@@ -63,13 +66,13 @@ module data_pathR5(clockDP, resetDP, nomeArquivoDP, endFile);
     Reg_mem regMem(clockDP, regWriteDP, instructionDP[19:15], instructionDP[24:20],
      instructionDP[11:7], writeRegDataDP, readData1DP, readData2DP); //
     immGen immGen(instructionDP, immGenOutDP); //
-    Alu_Control Alu_Control(f3f7AluCtrlDP, aluOpDP, aluCtrlDP); //
+    Alu_Control aluControl(f3f7AluCtrlDP, aluOpDP, aluCtrlDP); //
     somador add4(32'h4, pcOutDP, add4OutDP);
     somador addBranch(pcOutDP, immGenOutDP, addBranchDP);
-    Alu alu(readData1DP, muxAluOutDP, aluCtrlDP, aluOutDP, aluZeroDP);
+    alu alu(readData1DP, muxAluOutDP, aluCtrlDP, aluOutDP, aluZeroDP);
     data_mem dataMem(clockDP, memReadDP, memWriteDP, aluOutDP, readData2DP, readMemDP);
-    Mux2In muxAdds(add4OutDP, addBranchDP, pcInDP, andOutDP);
-    Mux2In muxAlu(readData2DP, immGenOutDP, muxAluOutDP, aluSrcDP);
-    Mux2In muxDataMem(aluOutDP, readMemDP, writeRegDataDP, memToRegDP);
+    mux2In muxAdds(add4OutDP, addBranchDP, pcInDP, branchTaken);
+    mux2In muxAlu(readData2DP, immGenOutDP, muxAluOutDP, aluSrcDP);
+    mux2In muxDataMem(aluOutDP, readMemDP, writeRegDataDP, memToRegDP);
 
 endmodule

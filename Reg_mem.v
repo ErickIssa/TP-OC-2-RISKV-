@@ -1,5 +1,5 @@
 `timescale 1ns/1ps
-// module Reg_mem_tb;
+// module registerMem_tb;
 //     reg _clock, _regWrite;
 //     reg [4:0] _readReg1, _readReg2, _writeRegId;
 //     reg [31:0] _writeData;
