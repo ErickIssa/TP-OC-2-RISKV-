@@ -20,24 +20,18 @@
 //
 // endmodule
 
-module registerMem(
-    clock, regWrite, readReg1, readReg2, writeRegId, writeData,
-    readData1, readData2
-    );
+module Reg_mem(clock, regWrite, readReg1, readReg2, writeRegId, writeData, readData1, readData2);
     input clock, regWrite;
     input [4:0] readReg1, readReg2, writeRegId;
     input [31:0] writeData;
     output reg [31:0] readData1, readData2;
     reg [31:0] registradores [0:31];
-
     integer i;
-
     initial begin
         for (i = 0; i < 32; i = i +1) begin
             registradores[i] = 0;
         end
     end
-
     always @(registradores[0]) registradores[0] = 0;
 
     always @(posedge clock) begin
@@ -53,5 +47,4 @@ module registerMem(
     begin
         readData2 <= registradores[readReg2];
     end
-
 endmodule
