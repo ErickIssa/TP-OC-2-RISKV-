@@ -32,7 +32,7 @@
 
 // endmodule
 
-module dataMemory(clock, memReadDM, memWriteDM, addressDM, writeDataDM, readDataDM);
+module data_mem(clock, memReadDM, memWriteDM, addressDM, writeDataDM, readDataDM);
     input clock, memReadDM, memWriteDM;
     input [31:0] addressDM, writeDataDM;
     output reg [31:0] readDataDM;
