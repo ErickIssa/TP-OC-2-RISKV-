@@ -11,7 +11,7 @@
 
 // endmodule
 
-module instructionMemory(readAddress, nomeArquivo, instruction, fimDoArquivo);
+module Intruction_mem(readAddress, nomeArquivo, instruction, fimDoArquivo);
     input [31:0] readAddress;
     input [8*25:0] nomeArquivo;
     output reg [31:0] instruction;
